@@ -1,0 +1,26 @@
+# 个人记忆与工作区数据（严禁上传）
+.workbuddy/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# 运行产物
+tracker_snapshot.png
+
+# IDE / 编辑器
+.theia/
+.vscode/
+*.code-workspace
+
+# 系统垃圾
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# 内部/无关内容（保留本地，不进仓库）
+progress_video_script_*.md
+tools/sleep_pc.py
