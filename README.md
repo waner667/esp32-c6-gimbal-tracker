@@ -91,3 +91,9 @@ C:\Users\a\.workbuddy\binaries\python\versions\3.13.12\python.exe <脚本名>
 3. **遥控联调**：FS-i6X 开机，串口应打印 `RC LOCK i-BUS`；拨右手柄 ch1/ch2 直接控。
 
 **可选**：`python gimbal_firmware/verify_powerup.py` 自动版全量验收（手动五条已过，备查）。
+
+---
+
+## 许可证
+
+MIT License，见 [LICENSE](LICENSE)。Copyright (c) 2026 waner667
