@@ -1,0 +1,82 @@
+<svg viewBox="0 0 680 552" width="680" height="552" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>ESP32-C6 两轴云台人脸追踪闭环架构图</title>
+<desc>从 USB 摄像头经 YuNet 人脸检测、偏移计算与平滑，通过 COM10 串口发送角度指令到 ESP32-C6 固件，驱动 SG90 云台舵机，弧形回箭表示闭环。</desc>
+<defs>
+<marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="#185FA5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+<marker id="arrowGray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+</defs>
+<text x="340" y="48" text-anchor="middle" style="font-family:var(--font-sans,sans-serif);font-size:14px;font-weight:500;fill:#2C2C2A">ESP32-C6 两轴云台 · 人脸追踪闭环架构</text>
+<text x="340" y="66" text-anchor="middle" style="font-family:var(--font-sans,sans-serif);font-size:12px;font-weight:400;fill:#5F5E5A">PC 视觉 → 串口指令 → C6 PWM → SG90 执行 → 闭环追人</text>
+<text x="40" y="88" style="font-family:var(--font-sans,sans-serif);font-size:12px;font-weight:400;fill:#5F5E5A">PC 软件层 · tracker.py</text>
+<g>
+<rect x="40" y="100" width="131" height="56" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="105.5" y="122" text-anchor="middle" dominant-baseline="central" style="font-family:var(--font-sans,sans-serif);font-size:14px;font-weight:500;fill:#0C447C">USB 摄像头</text>
+<text x="105.5" y="142" text-anchor="middle" dominant-baseline="central" style="font-family:var(--font-sans,sans-serif);font-size:12px;font-weight:400;fill:#185FA5">采集视频帧</text>
+</g>
+<g>
+<rect x="196" y="100" width="131" height="56" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="261.5" y="122" text-anchor="middle" dominant-baseline="central" style="font-family:var(--font-sans,sans-serif);font-size:14px;font-weight:500;fill:#0C447C">YuNet 人脸检测</text>
+<text x="261.5" y="142" text-anchor="middle" dominant-baseline="central" style="font-family:var(--font-sans,sans-serif);font-size:12px;font-weight:400;fill:#185FA5">OpenCV · ONNX</text>
+</g>
+<g>
+<rect x="352" y="100" width="131" height="56" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="417.5" y="122" text-anchor="middle" dominant-baseline="central" style="font-family:var(--font-sans,sans-serif);font-size:14px;font-weight:500;fill:#0C447C">偏移计算 + 平滑</text>
+<text x="417.5" y="142" text-anchor="middle" dominant-baseline="central" style="font-family:var(--font-sans,sans-serif);font-size:12px;font-weight:400;fill:#185FA5">死区 45/35 px</text>
+</g>
+<g>
+<rect x="508" y="100" width="131" height="56" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="573.5" y="122" text-anchor="middle" dominant-baseline="central" style="font-family:var(--font-sans,sans-serif);font-size:14px;font-weight:500;fill:#0C447C">角度指令</text>
+<text x="573.5" y="142" text-anchor="middle" dominant-baseline="central" style="font-family:var(--font-sans,sans-serif);font-size:12px;font-weight:400;fill:#185FA5">ServoLink 发送</text>
+</g>
+<path d="M173 128 H192" fill="none" stroke="#185FA5" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+<path d="M329 128 H348" fill="none" stroke="#185FA5" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+<path d="M485 128 H504" fill="none" stroke="#185FA5" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+<path d="M573.5 158 V204" fill="none" stroke="#185FA5" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+<text x="456" y="194" style="font-family:var(--font-sans,sans-serif);font-size:12px;font-weight:400;fill:#5F5E5A">通信层</text>
+<g>
+<rect x="456" y="206" width="184" height="56" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="548" y="228" text-anchor="middle" dominant-baseline="central" style="font-family:var(--font-sans,sans-serif);font-size:14px;font-weight:500;fill:#0C447C">USB 串口 COM10</text>
+<text x="548" y="248" text-anchor="middle" dominant-baseline="central" style="font-family:var(--font-sans,sans-serif);font-size:12px;font-weight:400;fill:#185FA5">CH343 · 115200 8N1</text>
+</g>
+<path d="M573.5 264 V292" fill="none" stroke="#185FA5" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+<text x="456" y="284" style="font-family:var(--font-sans,sans-serif);font-size:12px;font-weight:400;fill:#5F5E5A">固件层</text>
+<g>
+<rect x="456" y="296" width="184" height="80" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="548" y="318" text-anchor="middle" dominant-baseline="central" style="font-family:var(--font-sans,sans-serif);font-size:14px;font-weight:500;fill:#0C447C">ESP32-C6 固件</text>
+<text x="548" y="340" text-anchor="middle" dominant-baseline="central" style="font-family:var(--font-sans,sans-serif);font-size:12px;font-weight:400;fill:#185FA5">gimbal_firmware_ledc</text>
+<text x="548" y="360" text-anchor="middle" dominant-baseline="central" style="font-family:var(--font-sans,sans-serif);font-size:12px;font-weight:400;fill:#185FA5">ledc.h PWM · 限位 10°–170°</text>
+</g>
+<path d="M573.5 378 V406" fill="none" stroke="#185FA5" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+<text x="456" y="398" style="font-family:var(--font-sans,sans-serif);font-size:12px;font-weight:400;fill:#5F5E5A">执行层</text>
+<g>
+<rect x="456" y="410" width="184" height="56" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="548" y="432" text-anchor="middle" dominant-baseline="central" style="font-family:var(--font-sans,sans-serif);font-size:14px;font-weight:500;fill:#0C447C">SG90 ×2 云台舵机</text>
+<text x="548" y="452" text-anchor="middle" dominant-baseline="central" style="font-family:var(--font-sans,sans-serif);font-size:12px;font-weight:400;fill:#185FA5">PAN + TILT 两轴</text>
+</g>
+<g>
+<rect x="130" y="206" width="240" height="80" rx="8" fill="#F1EFE8" stroke="#888780" stroke-width="0.5"/>
+<text x="146" y="228" style="font-family:var(--font-sans,sans-serif);font-size:12px;font-weight:500;fill:#444441">串口辨识</text>
+<text x="146" y="250" style="font-family:var(--font-sans,sans-serif);font-size:12px;font-weight:400;fill:#5F5E5A">COM3–9 是蓝牙噪音</text>
+<text x="146" y="270" style="font-family:var(--font-sans,sans-serif);font-size:12px;font-weight:400;fill:#5F5E5A">COM10=CH343 唯一真实口</text>
+</g>
+<g>
+<rect x="130" y="296" width="240" height="80" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text x="146" y="318" style="font-family:var(--font-sans,sans-serif);font-size:12px;font-weight:500;fill:#633806">固件铁律</text>
+<text x="146" y="340" style="font-family:var(--font-sans,sans-serif);font-size:12px;font-weight:400;fill:#854F0B">必烧 gimbal_firmware_ledc</text>
+<text x="146" y="360" style="font-family:var(--font-sans,sans-serif);font-size:12px;font-weight:400;fill:#854F0B">ESP32Servo 版无波形，已废弃</text>
+</g>
+<g>
+<rect x="130" y="410" width="240" height="56" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text x="146" y="432" style="font-family:var(--font-sans,sans-serif);font-size:12px;font-weight:500;fill:#633806">供电铁律</text>
+<text x="146" y="452" style="font-family:var(--font-sans,sans-serif);font-size:12px;font-weight:400;fill:#854F0B">外部 5V 独立供电，USB 只供板子</text>
+</g>
+<path d="M372 240 H454" fill="none" stroke="#888780" stroke-width="0.5" stroke-dasharray="4 3"/>
+<path d="M372 336 H454" fill="none" stroke="#888780" stroke-width="0.5" stroke-dasharray="4 3"/>
+<path d="M372 438 H454" fill="none" stroke="#888780" stroke-width="0.5" stroke-dasharray="4 3"/>
+<path d="M573.5 466 V506 Q573.5 518 561.5 518 H107 Q95 518 95 506 V162" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+<text x="340" y="510" text-anchor="middle" style="font-family:var(--font-sans,sans-serif);font-size:12px;font-weight:400;fill:#5F5E5A">闭环：舵机转动 → 云台姿态变化 → 摄像头视野变化 → 重新检测</text>
+</svg>
